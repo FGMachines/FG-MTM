@@ -1,0 +1,7 @@
+# Keep source recordings and private deployment settings out of this public repository.
+*.mp4
+*.mov
+*.mkv
+.env
+*.dump
+*.backup
