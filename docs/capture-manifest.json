@@ -1,0 +1,68 @@
+[
+  {
+    "screenshot": "docs/screenshots/windows-home.png",
+    "source": "windows-video",
+    "seconds": 9,
+    "privacy": "Application window cropped"
+  },
+  {
+    "screenshot": "docs/screenshots/windows-hotspot.png",
+    "source": "windows-video",
+    "seconds": 12.5,
+    "privacy": "Application window cropped"
+  },
+  {
+    "screenshot": "docs/screenshots/windows-portal.png",
+    "source": "windows-video",
+    "seconds": 18.5,
+    "privacy": "Phone field hidden"
+  },
+  {
+    "screenshot": "docs/screenshots/windows-backup.png",
+    "source": "windows-video",
+    "seconds": 15.5,
+    "privacy": "Application window cropped"
+  },
+  {
+    "screenshot": "docs/screenshots/windows-business.png",
+    "source": "windows-video",
+    "seconds": 26,
+    "privacy": "Application window cropped"
+  },
+  {
+    "screenshot": "docs/screenshots/windows-server.png",
+    "source": "windows-video",
+    "seconds": 37,
+    "privacy": "Application window cropped"
+  },
+  {
+    "screenshot": "docs/screenshots/server-home.png",
+    "source": "server-video",
+    "seconds": 7,
+    "privacy": "Server identity hidden; browser chrome excluded"
+  },
+  {
+    "screenshot": "docs/screenshots/server-radius.png",
+    "source": "server-video",
+    "seconds": 13,
+    "privacy": "Server identity hidden; browser chrome excluded"
+  },
+  {
+    "screenshot": "docs/screenshots/server-routers.png",
+    "source": "server-video",
+    "seconds": 19,
+    "privacy": "Server identity hidden; browser chrome excluded"
+  },
+  {
+    "screenshot": "docs/screenshots/server-diagnostics.png",
+    "source": "server-video",
+    "seconds": 26,
+    "privacy": "Server identity hidden; browser chrome excluded"
+  },
+  {
+    "screenshot": "docs/screenshots/server-operator.png",
+    "source": "server-video",
+    "seconds": 31,
+    "privacy": "Server identity hidden; browser chrome excluded"
+  }
+]
