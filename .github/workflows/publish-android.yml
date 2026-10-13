@@ -1,0 +1,62 @@
+name: Publish verified Android APK
+on:
+  push:
+    branches: [main]
+    paths: ["distribution/android-0.20.4/**", ".github/workflows/publish-android.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: android-0.20.4-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct approved APK and verify SHA256
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib,json,pathlib,zipfile
+          m=json.loads(pathlib.Path('distribution/android-0.20.4/manifest.json').read_text())
+          data=b''.join(pathlib.Path(p).read_bytes() for p in m['parts'])
+          assert len(data)==m['size'], 'Size mismatch'
+          assert hashlib.sha256(data).hexdigest()==m['sha256'], 'SHA256 mismatch'
+          out=pathlib.Path('android-assets');out.mkdir()
+          apk=out/m['asset'];apk.write_bytes(data)
+          with zipfile.ZipFile(apk) as z:
+              assert 'AndroidManifest.xml' in z.namelist()
+              assert z.testzip() is None, 'Invalid ZIP entry'
+          (out/'SHA256SUMS.txt').write_text(m['sha256']+'  '+m['asset']+'\n')
+          PYCODE
+      - name: Verify Android 15 signature and stable certificate
+        run: |
+          signer="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+          if [ ! -x "$signer" ]; then
+            sdkmanager "build-tools;35.0.0"
+          fi
+          "$signer" verify --min-sdk-version 35 --max-sdk-version 35 --print-certs android-assets/FG-MTM-Android-0.20.4.apk > certificate.txt
+          grep -Fx 'Signer #1 certificate SHA-256 digest: 4218f40caf43573a4ef9f79279e43f5a54424cdf28436e45ee3a1e84645fc502' certificate.txt
+      - name: Write release notes
+        run: |
+          cat > notes.md <<'NOTES'
+          نسخة Android 0.20.4 المعتمدة من FG MTM.
+
+          إدارة MikroTik من الهاتف، إنشاء كروت HotSpot وUser Manager وPPPoE، ومتابعة المشتركين والأعمال. واجهة عربية، مركز راوترات، وأدوات تشخيص ومراقبة حسب إعداد الجهاز وصلاحيات الحساب.
+
+          تم تحسين توزيع بطاقات الرئيسية ومركز الأعمال، وكتابة Terminal بالإنجليزية، وتحديث أيقونة التطبيق.
+
+          الملف هو نسخة المراجعة المعتمدة نفسها، ويحتفظ بهوية التثبيت والتوقيع السابقين. اسم التطبيق على الجهاز قد يظهر FG MTM Review. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية أو توقيع نسخة أقدم قد يمنع التثبيت فوقها.
+
+          بصمة SHA256 موجودة في SHA256SUMS.txt. كتاب الاستخدام: https://github.com/FGMachines/FG-MTM/blob/main/docs/FG-MTM-User-Book-AR.pdf
+          NOTES
+      - name: Publish Android download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view android-v0.20.4 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload android-v0.20.4 android-assets/* --clobber --repo "$GITHUB_REPOSITORY"
+            gh release edit android-v0.20.4 --title "FG MTM Android 0.20.4" --notes-file notes.md --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create android-v0.20.4 android-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Android 0.20.4" --notes-file notes.md --latest=false
+          fi

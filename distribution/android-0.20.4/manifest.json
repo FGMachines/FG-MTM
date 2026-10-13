@@ -1,0 +1,17 @@
+{
+  "version": "0.20.4",
+  "tag": "android-v0.20.4",
+  "asset": "FG-MTM-Android-0.20.4.apk",
+  "sha256": "fc591a206c8c0770019adb27de6b6532546784c0d66af11d71243010f0e7e3ea",
+  "size": 14299201,
+  "certificate_sha256": "4218f40caf43573a4ef9f79279e43f5a54424cdf28436e45ee3a1e84645fc502",
+  "parts": [
+    "distribution/android-0.20.4/part-000.bin",
+    "distribution/android-0.20.4/part-001.bin",
+    "distribution/android-0.20.4/part-002.bin",
+    "distribution/android-0.20.4/part-003.bin",
+    "distribution/android-0.20.4/part-004.bin",
+    "distribution/android-0.20.4/part-005.bin",
+    "distribution/android-0.20.4/part-006.bin"
+  ]
+}
