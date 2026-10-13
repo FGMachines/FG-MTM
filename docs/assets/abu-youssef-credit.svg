@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="208" viewBox="0 0 760 208" role="img" aria-labelledby="title desc">
+<title id="title">أُنشئ هذا المشروع بناءً على رغبة أبو يوسف عطا</title>
+<desc id="desc">اسم أبو يوسف عطا باللون الأخضر، وزر ذهبي لزيارة صفحته على Facebook.</desc>
+<defs><linearGradient id="panel" x2="1" y2="1"><stop stop-color="#132a2b"/><stop offset="1" stop-color="#081725"/></linearGradient><linearGradient id="button"><stop stop-color="#f5d982"/><stop offset="1" stop-color="#d5aa44"/></linearGradient></defs>
+<rect x="1" y="1" width="758" height="206" rx="24" fill="url(#panel)" stroke="#42c78b" stroke-opacity=".65" stroke-width="2"/>
+<text x="380" y="44" text-anchor="middle" direction="rtl" font-family="Tahoma, Arial, sans-serif" font-size="23" fill="#e9f4f0">أُنشئ هذا المشروع بناءً على رغبة</text>
+<text x="380" y="96" text-anchor="middle" direction="rtl" font-family="Tahoma, Arial, sans-serif" font-size="36" font-weight="bold" fill="#52e899">أبو يوسف عطا</text>
+<rect x="215" y="127" width="330" height="54" rx="17" fill="url(#button)"/>
+<text x="380" y="162" text-anchor="middle" direction="rtl" font-family="Tahoma, Arial, sans-serif" font-size="22" font-weight="bold" fill="#11251d">زيارة صفحته على فيسبوك</text>
+</svg>

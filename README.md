@@ -18,6 +18,8 @@
 - [شرح لوحة الخادم](docs/USER-GUIDE-AR.md#server)
 - [أسئلة شائعة وحل المشكلات](docs/USER-GUIDE-AR.md#faq)
 
+[![أُنشئ هذا المشروع بناءً على رغبة أبو يوسف عطا — زيارة صفحته على Facebook](docs/assets/abu-youssef-credit.svg)](https://www.facebook.com/share/1A9AYhomaK/)
+
 ## ما الذي يقدّمه البرنامج؟
 
 | مساحة العمل | الاستخدام |
