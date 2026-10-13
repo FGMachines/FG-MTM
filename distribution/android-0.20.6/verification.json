@@ -1,0 +1,36 @@
+{
+  "upgrade_from": "0.20.5-review",
+  "upgrade_to": "0.20.6-review",
+  "install_replace": "passed",
+  "saved_router_profile_preserved": true,
+  "navigation_and_bilingual_help": "passed",
+  "settings_two_columns": true,
+  "paired_connection_credentials": true,
+  "business_grid_navigation": "passed",
+  "small_screen_large_font": "passed",
+  "read_only_router_fixture_navigation": "passed",
+  "physical_router_tested": false,
+  "crashes": false,
+  "candidate_sha256": "36a3dd19f3184415086fde0e62e5ddd877cd5aee829749594555b88f46a77122",
+  "core_evidence_run": 38454898560,
+  "router_navigation_evidence_run": 38456377316,
+  "evidence_combined_from_identical_apk": true,
+  "unit_tests": {
+    "tests": 159,
+    "failures": 0,
+    "errors": 0,
+    "unread": []
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 19
+  },
+  "r8": {
+    "renamed_application_classes": 835,
+    "debuggable": false
+  },
+  "resource_shrinking": true,
+  "application_source_commit": "bf58d51dc3591ecc7173cfcd6c9512f3dfa9e531",
+  "build_run": 38442925196,
+  "certificate_sha256": "4218f40caf43573a4ef9f79279e43f5a54424cdf28436e45ee3a1e84645fc502"
+}

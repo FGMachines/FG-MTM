@@ -1,0 +1,24 @@
+{
+  "size": 4009984,
+  "sha256": "36a3dd19f3184415086fde0e62e5ddd877cd5aee829749594555b88f46a77122",
+  "parts": [
+    "distribution/android-0.20.6/part-000.b64",
+    "distribution/android-0.20.6/part-001.b64",
+    "distribution/android-0.20.6/part-002.b64",
+    "distribution/android-0.20.6/part-003.b64",
+    "distribution/android-0.20.6/part-004.b64",
+    "distribution/android-0.20.6/part-005.b64",
+    "distribution/android-0.20.6/part-006.b64",
+    "distribution/android-0.20.6/part-007.b64",
+    "distribution/android-0.20.6/part-008.b64",
+    "distribution/android-0.20.6/part-009.b64",
+    "distribution/android-0.20.6/part-010.b64",
+    "distribution/android-0.20.6/part-011.b64",
+    "distribution/android-0.20.6/part-012.b64",
+    "distribution/android-0.20.6/part-013.b64",
+    "distribution/android-0.20.6/part-014.b64",
+    "distribution/android-0.20.6/part-015.b64",
+    "distribution/android-0.20.6/part-016.b64"
+  ],
+  "asset": "FG-MTM-Android-0.20.6.apk"
+}
