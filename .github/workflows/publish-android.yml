@@ -2,12 +2,12 @@ name: Publish verified Android APK
 on:
   push:
     branches: [main]
-    paths: ["distribution/android-0.20.4/**", ".github/workflows/publish-android.yml"]
+    paths: ["distribution/android-0.20.5/**", ".github/workflows/publish-android.yml"]
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: android-0.20.4-release
+  group: android-0.20.5-release
   cancel-in-progress: false
 jobs:
   publish:
@@ -17,9 +17,11 @@ jobs:
       - name: Reconstruct approved APK and verify SHA256
         run: |
           python3 - <<'PYCODE'
-          import hashlib,json,pathlib,zipfile
-          m=json.loads(pathlib.Path('distribution/android-0.20.4/manifest.json').read_text())
-          data=b''.join(pathlib.Path(p).read_bytes() for p in m['parts'])
+          import hashlib,json,pathlib,zipfile,base64
+          m=json.loads(pathlib.Path('distribution/android-0.20.5/manifest.json').read_text())
+          assert m['sha256']=='9dfdb30d3ddda41e0fdde0eb2b68a01092913edfecd683b86585a6bc2c2b8297'
+          assert m['size']==4009984
+          data=b''.join(base64.b64decode(pathlib.Path(p).read_text()) for p in m['parts'])
           assert len(data)==m['size'], 'Size mismatch'
           assert hashlib.sha256(data).hexdigest()==m['sha256'], 'SHA256 mismatch'
           out=pathlib.Path('android-assets');out.mkdir()
@@ -35,18 +37,22 @@ jobs:
           if [ ! -x "$signer" ]; then
             sdkmanager "build-tools;35.0.0"
           fi
-          "$signer" verify --min-sdk-version 35 --max-sdk-version 35 --print-certs android-assets/FG-MTM-Android-0.20.4.apk > certificate.txt
+          "$signer" verify --min-sdk-version 35 --max-sdk-version 35 --print-certs android-assets/FG-MTM-Android-0.20.5.apk > certificate.txt
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging android-assets/FG-MTM-Android-0.20.5.apk > identity.txt
+          grep -F "name='com.fgmachines.mikrotikmanager.preview'" identity.txt
+          grep -F "versionCode='35'" identity.txt
+          if grep -q application-debuggable identity.txt; then exit 1; fi
           grep -Fx 'Signer #1 certificate SHA-256 digest: 4218f40caf43573a4ef9f79279e43f5a54424cdf28436e45ee3a1e84645fc502' certificate.txt
       - name: Write release notes
         run: |
           cat > notes.md <<'NOTES'
-          نسخة Android 0.20.4 المعتمدة من FG MTM.
+          نسخة Android 0.20.5 المعتمدة من FG MTM.
 
           إدارة MikroTik من الهاتف، إنشاء كروت HotSpot وUser Manager وPPPoE، ومتابعة المشتركين والأعمال. واجهة عربية، مركز راوترات، وأدوات تشخيص ومراقبة حسب إعداد الجهاز وصلاحيات الحساب.
 
-          تم تحسين توزيع بطاقات الرئيسية ومركز الأعمال، وكتابة Terminal بالإنجليزية، وتحديث أيقونة التطبيق.
+          تحديث حماية للكود: تفعيل R8 لإعادة تسمية الكلاسات وتحسين الكود، تقليص الموارد، وتعطيل وضع Debug. تستمر هوية التطبيق والتوقيع الأصليان. الواجهة أعيد بناؤها من النسخة المنشورة على المصدر الخاص المحفوظ؛ تفاصيل النطاق والتحقق في docs/ANDROID-0.20.5-AR.md.
 
-          الملف هو نسخة المراجعة المعتمدة نفسها، ويحتفظ بهوية التثبيت والتوقيع السابقين. اسم التطبيق على الجهاز قد يظهر FG MTM Review. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية أو توقيع نسخة أقدم قد يمنع التثبيت فوقها.
+          الملف تحديث موقّع بالمفتاح الأصلي، ويحتفظ بهوية التثبيت والتوقيع السابقين. اسم التطبيق على الجهاز قد يظهر FG MTM Review. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية أو توقيع نسخة أقدم قد يمنع التثبيت فوقها.
 
           بصمة SHA256 موجودة في SHA256SUMS.txt. كتاب الاستخدام: https://github.com/FGMachines/FG-MTM/blob/main/docs/FG-MTM-User-Book-AR.pdf
           NOTES
@@ -54,9 +60,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view android-v0.20.4 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload android-v0.20.4 android-assets/* --clobber --repo "$GITHUB_REPOSITORY"
-            gh release edit android-v0.20.4 --title "FG MTM Android 0.20.4" --notes-file notes.md --repo "$GITHUB_REPOSITORY"
+          if gh release view android-v0.20.5 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload android-v0.20.5 android-assets/* --clobber --repo "$GITHUB_REPOSITORY"
+            gh release edit android-v0.20.5 --title "FG MTM Android 0.20.5" --notes-file notes.md --repo "$GITHUB_REPOSITORY"
           else
-            gh release create android-v0.20.4 android-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Android 0.20.4" --notes-file notes.md --latest=false
+            gh release create android-v0.20.5 android-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Android 0.20.5" --notes-file notes.md --latest=false
           fi

@@ -6,7 +6,7 @@
 
 إدارة الراوتر والكروت والمشتركين والأعمال — بهوية FG Machines.
 
-[تحميل أندرويد 0.20.4](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.4/FG-MTM-Android-0.20.4.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
+[تحميل أندرويد 0.20.5](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.5/FG-MTM-Android-0.20.5.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
 
 </div>
 
@@ -37,9 +37,11 @@
 
 **ابدأ في خمس خطوات:** ثبّت التطبيق ← اتصل بالراوتر ← افحص الجاهزية ← جرّب كارتًا واحدًا ← راجع نتيجة الدخول قبل إصدار دفعة.
 
-[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.4/FG-MTM-Android-0.20.4.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.4/SHA256SUMS.txt)
+[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.5/FG-MTM-Android-0.20.5.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.5/SHA256SUMS.txt)
 
-النسخة المنشورة **0.20.4** وقد يظهر اسمها على الهاتف **FG MTM Review**. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية التطبيق أو شهادة التوقيع قد يمنع التثبيت فوق نسخة أخرى. وظائف الشبكة تحتاج راوترًا قابلًا للوصول وصلاحيات مناسبة. وضع «بدون راوتر» للتصميم والحفظ. حفظ بروفايلات متعددة لا ينشئ اتصالًا بينها أو يدمج شبكاتها تلقائيًا.
+النسخة المنشورة **0.20.5** وقد يظهر اسمها على الهاتف **FG MTM Review**. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية التطبيق أو شهادة التوقيع قد يمنع التثبيت فوق نسخة أخرى. وظائف الشبكة تحتاج راوترًا قابلًا للوصول وصلاحيات مناسبة. وضع «بدون راوتر» للتصميم والحفظ. حفظ بروفايلات متعددة لا ينشئ اتصالًا بينها أو يدمج شبكاتها تلقائيًا.
+
+**تحديث حماية أندرويد:** تفعيل R8 لتصعيب قراءة الكود، تقليص الموارد وتعطيل Debug، مع الاحتفاظ بالتوقيع الأصلي. [تفاصيل الإصدار والتحقق](docs/ANDROID-0.20.5-AR.md).
 
 ## تحميل Windows 0.19.1
 

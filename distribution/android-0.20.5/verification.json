@@ -1,0 +1,9 @@
+{
+  "upgrade_from": "0.20.4-review",
+  "upgrade_to": "0.20.5-review",
+  "install_replace": "passed",
+  "saved_router_profile_preserved": true,
+  "navigation_and_bilingual_help": "passed",
+  "crashes": false,
+  "candidate_sha256": "9dfdb30d3ddda41e0fdde0eb2b68a01092913edfecd683b86585a6bc2c2b8297"
+}
