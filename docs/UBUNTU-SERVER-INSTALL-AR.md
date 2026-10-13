@@ -58,12 +58,12 @@ sudo docker compose version
 
 ## 3. نزّل ملفات الخادم الفعلية
 
-صفحة FG Machines هي صفحة التوزيع والشرح. مصدر الخادم العام حاليًا موجود في `nexvary/FG-MikroTik-Manager`. الأوامر التالية تنزّل نسخة محددة تمت مراجعة أوامر تشغيلها، ولا تحتاج رابط حزمة أو حساب GitHub خاص:
+مصدر تطبيق Android وWindows خاص. الملفات اللازمة لنشر الخادم وحده متاحة في `FGMachines/FG-MTM/server`. الأوامر التالية تنزّل نسخة ثابتة من هذه الملفات دون طلب حساب خاص:
 
 ```bash
-git clone --branch dev/product-family --single-branch https://github.com/nexvary/FG-MikroTik-Manager.git fg-mtm-source
+git clone --branch main --single-branch https://github.com/FGMachines/FG-MTM.git fg-mtm-source
 cd fg-mtm-source
-git checkout --detach 9f6e5e34f6e8754e43d282df4d225b942fbd2b94
+git checkout --detach da65122cabd37c5e98ab26a09d4b9ed6e73666c5
 cd server
 bash -n scripts/start-ubuntu.sh
 ```
@@ -235,7 +235,7 @@ sudo docker compose -p fg-mtm -f compose.yml -f compose.https.yml exec -T db pg_
 
 ```bash
 cd ..
-git fetch origin dev/product-family
+git fetch origin main
 git checkout --detach NEW_REVIEWED_COMMIT_SHA
 cd server
 sudo docker compose -p fg-mtm -f compose.yml -f compose.https.yml build
@@ -445,4 +445,4 @@ fi
 
 **حدود التحقق:** تمت مراجعة الأوامر مقابل ملفات المصدر المحددة وفحص صياغة shell. لم يُنفّذ تثبيت جديد على VPS فعلي ضمن إعداد هذا الدليل، ولا يُدّعى نجاح DNS أو HTTPS أو MikroTik عندك قبل الاختبار.
 
-[ملفات المصدر المحددة](https://github.com/nexvary/FG-MikroTik-Manager/tree/9f6e5e34f6e8754e43d282df4d225b942fbd2b94/server) · [شرح لوحة الخادم](USER-GUIDE-AR.md#server) · [العودة لصفحة المشروع](../README.md)
+[ملفات المصدر المحددة](https://github.com/FGMachines/FG-MTM/tree/da65122cabd37c5e98ab26a09d4b9ed6e73666c5/server) · [شرح لوحة الخادم](USER-GUIDE-AR.md#server) · [العودة لصفحة المشروع](../README.md)
