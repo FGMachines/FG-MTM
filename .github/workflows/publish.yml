@@ -1,0 +1,37 @@
+name: Publish verified executable
+on:
+  push:
+    branches: [main]
+    paths: ["distribution/**", ".github/workflows/publish.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct and verify executable
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib, json, pathlib
+          output=pathlib.Path('release-assets'); output.mkdir()
+          sums=[]
+          for asset in json.loads(pathlib.Path('distribution/manifest.json').read_text())['assets']:
+              data=b''.join(pathlib.Path(part).read_bytes() for part in asset['parts'])
+              assert len(data)==asset['size']
+              assert hashlib.sha256(data).hexdigest()==asset['sha256']
+              assert data[:2]==b'MZ'
+              (output/asset['name']).write_bytes(data)
+              sums.append(asset['sha256']+'  '+asset['name'])
+          (output/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n')
+          PYCODE
+      - name: Publish Windows download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.19.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload v0.19.1 release-assets/* --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create v0.19.1 release-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Windows 0.19.1" --notes "Windows installer. Server connection fields start empty. Existing account and branch data are preserved. SHA256SUMS.txt verifies the download." --latest
+          fi

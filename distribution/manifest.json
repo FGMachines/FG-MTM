@@ -1,0 +1,24 @@
+{
+  "assets": [
+    {
+      "name": "FG-MTM-Windows-0.19.1-Setup.exe",
+      "sha256": "e7c587b9e8c1d95d3234334b51cd8c9cd85205015bb0bae5c90ba7b32610893d",
+      "size": 27140698,
+      "parts": [
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part000",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part001",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part002",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part003",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part004",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part005",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part006",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part007",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part008",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part009",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part010",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part011",
+        "distribution/parts/FG-MTM-Windows-0.19.1-Setup.exe/part012"
+      ]
+    }
+  ]
+}
