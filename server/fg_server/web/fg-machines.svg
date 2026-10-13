@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 64" role="img" aria-labelledby="title">
+  <title id="title">FG Machines</title>
+  <defs>
+    <linearGradient id="gold" x2="0.8" y2="1"><stop stop-color="#fff0ad"/><stop offset=".45" stop-color="#d4af37"/><stop offset="1" stop-color="#a98120"/></linearGradient>
+    <linearGradient id="crimson" x2="1" y2="1"><stop stop-color="#ab2345"/><stop offset="1" stop-color="#481323"/></linearGradient>
+  </defs>
+  <path d="M6 15 31 2 56 15v32L31 62 6 47Z" fill="url(#crimson)" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M17 23h12m-12 0v20m0-11h10m18-8h-8v18h9V32h-5" fill="none" stroke="url(#gold)" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="round"/>
+  <text x="69" y="29" fill="url(#gold)" font-family="Arial,sans-serif" font-weight="700" font-size="25" letter-spacing="3">FG</text>
+  <text x="69" y="47" fill="#e3e9ec" font-family="Arial,sans-serif" font-weight="700" font-size="16" letter-spacing="2">MACHINES</text>
+  <path d="M69 55h113" stroke="url(#gold)" stroke-width="1"/>
+</svg>

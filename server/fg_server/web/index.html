@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FG MTM — Server</title><link rel="stylesheet" href="/panel/panel.css"><script type="module" src="/panel/panel.js"></script></head>
+<body>
+<header><div class="brand"><div><img class="brand-logo" src="/panel/fg-machines.svg" alt="FG Machines" width="210" height="64"><span class="subtitle">FG MTM · <span data-i18n="server">إدارة الخادم</span></span></div></div><div class="actions"><button id="language" type="button">English</button><button id="logout" type="button" hidden data-i18n="logout">تسجيل الخروج</button></div></header>
+<main>
+<section id="login-card" class="card login">
+<img class="login-logo" src="/panel/fg-machines.svg" alt="FG Machines" width="210" height="64"><p class="eyebrow">FG SERVER / FG CLOUD</p><h1 data-i18n="welcome">إدارة شبكتك من مكان واحد</h1><p data-i18n="intro">تابع بيانات فرعك ومزامنة أجهزتك وجلسات RADIUS من خادمك الخاص.</p>
+<form id="login-form"><label for="username" data-i18n="username">اسم المستخدم</label><input id="username" name="username" autocomplete="username" required maxlength="120" dir="ltr"><label for="password" data-i18n="password">كلمة المرور</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="128" dir="ltr"><button type="submit" class="primary" data-i18n="login">تسجيل الدخول</button></form>
+<p class="muted" data-i18n="privacy">الجلسة في ذاكرة الصفحة فقط؛ تُمسح عند إعادة تحميلها. لا نحفظ كلمة المرور.</p>
+</section>
+<div id="workspace" hidden><aside class="card"><button id="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation" data-i18n="menu">القائمة</button><h2 data-i18n="navigation">الإدارة</h2><nav id="navigation"></nav><details class="account-scope"><summary data-i18n="scopeDetails">بيانات الحساب والفرع</summary><div id="identity" class="scope"></div><p class="muted" data-i18n="scope">تعرض اللوحة الشركة والفرع المرتبطين بحسابك فقط.</p></details></aside><section class="content"><div class="page-head"><div><button id="back" type="button" hidden>رجوع</button><p class="eyebrow">FG SERVER / CONTROL CENTER</p><h1 id="page-title"></h1></div><button id="refresh" type="button" data-i18n="refresh">تحديث</button></div><div class="workspace-meta"><p id="updated" class="muted"></p><span id="scope-chip" class="scope-chip"></span></div><div id="view"></div></section></div>
+<p id="message" role="status" aria-live="polite"></p>
+</main><footer data-i18n="footer">FG MTM · لوحة متابعة الخادم · العمليات المالية تُدار من التطبيق وتُزامن هنا</footer>
+</body></html>

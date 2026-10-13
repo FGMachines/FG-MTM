@@ -1,0 +1,16 @@
+# Optional for a dedicated host with free ports 80/443. Existing proxies should use loopback:8080 instead.
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      FG_DOMAIN: ${FG_DOMAIN:?Set a DNS hostname pointing at this server}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+      - caddyconfig:/config
+    depends_on: [api]
+volumes:
+  caddydata:
+  caddyconfig:

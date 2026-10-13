@@ -1,0 +1,5 @@
+{$FG_DOMAIN} {
+    header Strict-Transport-Security "max-age=31536000"
+    redir / /panel/ 302
+    reverse_proxy api:8080
+}
