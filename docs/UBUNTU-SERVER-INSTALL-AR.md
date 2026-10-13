@@ -254,6 +254,181 @@ sudo docker update --restart unless-stopped "$(sudo docker compose -p fg-mtm -f 
 
 كرر ذلك بعد إعادة إنشاء حاوية قاعدة البيانات. بعد أي إعادة تشغيل أو تحديث، راجع `ps` والدخول والمزامنة.
 
+## أوامر احتياطية وإدارة المؤسسة والفرع
+
+الأوامر دي لمسؤول عنده SSH وصلاحية sudo على السيرفر. لا تعمل إعادة ضبط لقاعدة البيانات بسبب نسيان كلمة مرور.
+
+### تجهيز اختصار الأوامر
+
+من مجلد `fg-mtm-source/server` عرّف الدالة التالية في نفس جلسة SSH. تختار Caddy أو Compose الأساسي حسب وجود إعداد الدومين:
+
+```bash
+fgc() {
+    if sudo grep -q '^FG_DOMAIN=' .env; then
+        sudo docker compose -p fg-mtm -f compose.yml -f compose.https.yml "$@"
+    else
+        sudo docker compose -p fg-mtm -f compose.yml "$@"
+    fi
+}
+fgc ps
+```
+
+لو اخترت يدويًا إعدادًا مختلفًا عن الدليل، عدّل ملفات Compose في الدالة لتطابق تثبيتك. الدالة تختفي عند إغلاق جلسة SSH؛ عرّفها مرة أخرى عند الحاجة.
+
+### إنشاء حساب للمؤسسة والفرع
+
+المؤسسة والفرع هنا نطاقان للبيانات، وليسا اسم مستخدم الراوتر. إنشاء حساب جديد يربطه بالمعرّفين؛ لا ينشئ بيانات عملاء أو يدمج فروعًا تلقائيًا.
+
+لو التطبيق فيه بيانات، استعمل نفس المعرّفات الظاهرة في مزامنة الخادم. لتثبيت جديد يمكنك توليد معرّفين محليًا على السيرفر:
+
+```bash
+python3 - <<'PY'
+import uuid
+print("TENANT_ID=" + str(uuid.uuid4()))
+print("BRANCH_ID=" + str(uuid.uuid4()))
+PY
+```
+
+احتفظ بالقيم واستخدمها بدل `TENANT_ID` و`BRANCH_ID`. لا تولّد قيمًا جديدة لبيانات مؤسسة قائمة.
+
+```bash
+fgc run --rm api python -m fg_server account --tenant TENANT_ID --branch BRANCH_ID --username owner --role owner
+```
+
+سيطلب كلمة المرور مرتين دون إظهارها. حدها 12–128 حرفًا. اسم المستخدم يجب أن يكون فريدًا على هذا الخادم كله، حتى لو اختلف الفرع.
+
+فرع إضافي في نفس المؤسسة، بحساب مختلف:
+
+```bash
+fgc run --rm api python -m fg_server account --tenant TENANT_ID --branch NEW_BRANCH_ID --username branch2-owner --role owner
+```
+
+حساب قراءة للوحة:
+
+```bash
+fgc run --rm api python -m fg_server account --tenant TENANT_ID --branch BRANCH_ID --username panel-reader --role reader
+```
+
+صلاحية reader ليست صلاحية مزامنة أعمال؛ المزامنة تحتاج owner. لا تغيّر نطاق حساب موجود عشوائيًا لنقل البيانات.
+
+### معرفة الحسابات ومعرّفاتها وإعادة تعيين كلمة المرور
+
+نزّل أداة الإدارة المرفقة بإصدار ثابت، وافحصها قبل التشغيل:
+
+```bash
+curl --fail --show-error --location https://raw.githubusercontent.com/FGMachines/FG-MTM/696587c1c3031d883336fac79f6ad7930236b641/scripts/server-admin.py --output server-admin.py
+less server-admin.py
+```
+
+اخرج من less بالحرف q. الأداة تُشغّل داخل صورة API الموجودة؛ لا يحتاج السيرفر تثبيت psycopg خارج Docker:
+
+```bash
+fga() {
+    fgc run --rm -e PYTHONPATH=/srv -v "$PWD/server-admin.py:/tmp/server-admin.py:ro" api python /tmp/server-admin.py "$@"
+}
+fga accounts
+```
+
+يعرض أسماء الحسابات ومعرّفات المؤسسة والفرع والصلاحية وحالة التفعيل، دون كلمات المرور أو بصماتها. لا تنشر قائمة حساباتك في جروب الدعم.
+
+لو نسيت كلمة المرور:
+
+```bash
+fga reset-password --tenant TENANT_ID --branch BRANCH_ID --username owner
+```
+
+اكتب كلمة مرور جديدة مرتين. الأداة تتحقق من تطابق المؤسسة والفرع واسم الحساب، وتغيّر بصمة كلمة المرور وتزيل قفل محاولات الدخول وتلغي كل جلسات الحساب السابقة داخل معاملة واحدة. لا تغيّر الصلاحية ولا سجلات الأعمال، ولا تعيد تفعيل حساب معطّل. بعد النجاح سجل دخولك من جديد.
+
+**لا يمكن إظهار كلمة المرور القديمة؛ هذه إعادة تعيين.** الأداة ليست صفحة «نسيت كلمة المرور» عامة، وتعمل فقط لمن يملك إدارة السيرفر. لا تحتاج إعادة بناء الصورة أو حذف قاعدة البيانات.
+
+### نسخة احتياطية إضافية والتحقق منها
+
+خذ نسخة قبل تحديث مهم. لا يتم نشر قاعدة البيانات للإنترنت:
+
+```bash
+umask 077
+fg_backup_dir="$PWD/backups"
+mkdir -p "$fg_backup_dir"
+chmod 700 "$fg_backup_dir"
+fg_stamp=$(date -u +%Y%m%d-%H%M%S)
+fg_dump="$fg_backup_dir/fgmtm-$fg_stamp.dump"
+if fgc exec -T db pg_dump -U fgmtm -Fc fgmtm > "$fg_dump.tmp"; then
+    if test -s "$fg_dump.tmp"; then
+        mv "$fg_dump.tmp" "$fg_dump"
+        sha256sum "$fg_dump" > "$fg_dump.sha256"
+        sudo install -m 600 .env "$fg_backup_dir/env-$fg_stamp"
+        printf 'Backup: %s\n' "$fg_dump"
+    else
+        rm -f "$fg_dump.tmp"
+        echo 'Backup is empty; do not continue with maintenance.' >&2
+    fi
+else
+    rm -f "$fg_dump.tmp"
+    echo 'Backup failed; do not continue with maintenance.' >&2
+fi
+```
+
+انقل ملف dump وبصمته ونسخة env إلى مكان خاص خارج السيرفر. الملف env يحتوي أسرار الاتصال بقاعدة البيانات. النسخة لا تشمل ملفات شهادات Caddy أو إعدادات Nginx؛ احتفظ بها منفصلة وفق طريقة النشر.
+
+للتحقق، ضع المسار الحقيقي لملف البصمة:
+
+```bash
+sha256sum -c /ABSOLUTE/PATH/fgmtm-TIMESTAMP.dump.sha256
+```
+
+البصمة تثبت سلامة الملف مقارنة بنسختك، لا تثبت أن الاستعادة نجحت.
+
+### تجربة الاستعادة في قاعدة منفصلة
+
+استخدم ملف النسخة الحقيقي. الاختبار التالي ينشئ قاعدة جديدة باسم `fgmtm_restore_check` ويترك قاعدة التشغيل `fgmtm` كما هي. لو قاعدة الاختبار موجودة بالفعل، لا تكرر الاستعادة فوقها؛ اختر اسم اختبار جديدًا وغيّره في كل الأوامر.
+
+```bash
+fgc exec -T db createdb -U fgmtm fgmtm_restore_check
+fgc exec -T db pg_restore -U fgmtm -d fgmtm_restore_check --exit-on-error --single-transaction < /ABSOLUTE/PATH/fgmtm-TIMESTAMP.dump
+fgc exec -T db psql -U fgmtm -d fgmtm_restore_check -c 'SELECT count(*) AS accounts FROM accounts;'
+fgc exec -T db psql -U fgmtm -d fgmtm_restore_check -c 'SELECT count(*) AS revisions FROM business_sync_heads;'
+```
+
+توقف إذا فشل أي أمر؛ لا تعتبر ظهور عدد سجلات اختبارًا كاملًا للدخول أو المزامنة. قاعدة الاختبار تحتوي بيانات حقيقية أيضًا؛ احتفظ بها ضمن حماية السيرفر. استبدال قاعدة تشغيل قائمة يحتاج خطة صيانة ونسخة جديدة وإيقاف API وworker؛ لم نوفر أمرًا يمسح قاعدة التشغيل تلقائيًا.
+
+### تشغيل الخدمات ومراجعة الأعطال
+
+```bash
+fgc ps
+fgc logs --tail=100 api worker db
+curl --fail --show-error http://127.0.0.1:8080/health
+```
+
+لو تغيّر منفذ loopback، غيّره في curl أيضًا. عند تعطل API أو worker، وبعد مراجعة السجلات:
+
+```bash
+fgc restart api worker
+```
+
+لا يعيد هذا إنشاء الحسابات ولا يحذف البيانات، لكنه يقطع الطلبات الجاري تنفيذها؛ راجع حالة آخر مزامنة قبل تكرارها.
+
+عند إعادة تشغيل السيرفر أو توقف حاويات المشروع:
+
+```bash
+fgc up -d
+```
+
+لتشغيل قاعدة البيانات تلقائيًا بعد إعادة التشغيل:
+
+```bash
+fg_db_container=$(fgc ps -q db)
+if test -n "$fg_db_container"; then
+    sudo docker update --restart unless-stopped "$fg_db_container"
+else
+    echo 'Database container was not found; check fgc ps.' >&2
+fi
+```
+
+راجع الدخول والتشخيص والمزامنة بعد رجوع الخدمات. لا تستخدم `down -v` أو حذف `.env` كحل لفشل تسجيل الدخول.
+
+**التحقق من أداة الاستعادة:** نجحت 4 اختبارات منطقية تشمل تطابق النطاق، رفض الحساب المعطّل أو غير الموجود، رفض كلمة مرور قصيرة، وإلغاء إتمام المعاملة عند فشل إلغاء الجلسات. لم تُختبر الأداة على PostgreSQL أو VPS فعلي ضمن هذا التعديل.
+
+
 ## حل المشكلات
 
 | المشكلة | تراجع إيه؟ |
