@@ -6,7 +6,7 @@
 
 إدارة الراوتر والكروت والمشتركين والأعمال — بهوية FG Machines.
 
-[تحميل أندرويد 0.20.7](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.7/FG-MTM-Android-0.20.7.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
+[تحميل أندرويد 0.20.8](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.8/FG-MTM-Android-0.20.8.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
 
 </div>
 
@@ -20,7 +20,7 @@
 
 | الاتصال بالراوتر | الرئيسية | إنشاء الكروت |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/android-0.20.7-home-arabic.png" width="220" alt="شاشة الاتصال واكتشاف الراوترات على أندرويد"> | <img src="docs/screenshots/android-0.20.7-main-menu-arabic.png" width="220" alt="القائمة الرئيسية على أندرويد"> | <img src="docs/screenshots/android-0.20.7-vouchers-arabic.png" width="220" alt="إعداد كروت الدخول على أندرويد"> |
+| <img src="docs/screenshots/android-0.20.8-home-arabic.png" width="220" alt="شاشة الاتصال واكتشاف الراوترات على أندرويد"> | <img src="docs/screenshots/android-0.20.8-main-menu-arabic.png" width="220" alt="القائمة الرئيسية على أندرويد"> | <img src="docs/screenshots/android-0.20.8-vouchers-arabic.png" width="220" alt="إعداد كروت الدخول على أندرويد"> |
 
 ### هتستفيد بإيه؟
 
@@ -37,11 +37,11 @@
 
 **ابدأ في خمس خطوات:** ثبّت التطبيق ← اتصل بالراوتر ← افحص الجاهزية ← جرّب كارتًا واحدًا ← راجع نتيجة الدخول قبل إصدار دفعة.
 
-[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.7/FG-MTM-Android-0.20.7.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.7/SHA256SUMS.txt)
+[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.8/FG-MTM-Android-0.20.8.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.8/SHA256SUMS.txt)
 
-النسخة المنشورة **0.20.7** وقد يظهر اسمها على الهاتف **FG MTM Review**. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية التطبيق أو شهادة التوقيع قد يمنع التثبيت فوق نسخة أخرى. وظائف الشبكة تحتاج راوترًا قابلًا للوصول وصلاحيات مناسبة. وضع «بدون راوتر» للتصميم والحفظ. حفظ بروفايلات متعددة لا ينشئ اتصالًا بينها أو يدمج شبكاتها تلقائيًا.
+النسخة المنشورة **0.20.8** وقد يظهر اسمها على الهاتف **FG MTM Review**. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية التطبيق أو شهادة التوقيع قد يمنع التثبيت فوق نسخة أخرى. وظائف الشبكة تحتاج راوترًا قابلًا للوصول وصلاحيات مناسبة. وضع «بدون راوتر» للتصميم والحفظ. حفظ بروفايلات متعددة لا ينشئ اتصالًا بينها أو يدمج شبكاتها تلقائيًا.
 
-**تصحيح واجهة 0.20.7:** عودة تحسينات 0.20.4: قطع الاتصال في الإعدادات فقط، بطاقات الكروت المصغرة وقوائم المدة والباقات، نوافذ الانتهاء والطباعة، رابط GitHub وجروب Facebook، وإحصاءات المشتركين وUser Manager. تستمر حماية R8 والتوقيع الأصلي. [صور التشغيل وتفاصيل التحقق](docs/ANDROID-0.20.7-AR.md).
+**تحديث 0.20.8:** إصلاح قراءة نقاط الوصول في العرض الواسع، وتحسين تأكيد إنشاء الكارت الفردي في نص المشاركة. يحتفظ بتحسينات تصميم 0.20.4 المستعادة في 0.20.7 وبحماية R8 والتوقيع الأصلي. اجتاز التحديث فوق 0.20.7 على Android 15 مع بقاء الجهاز المحفوظ. [صور التشغيل وتفاصيل التحقق](docs/ANDROID-0.20.8-AR.md).
 
 ## تحميل Windows 0.19.1
 
@@ -99,7 +99,7 @@
 
 الجداول الفاضية والأرقام في الصور تخص وقت التصوير. فتح شاشة أو ظهور زر مش دليل إن العملية نجحت على الراوتر؛ اقرأ النتيجة وجرب الوظيفة بعد التنفيذ.
 
-**المحتوى المتاح هنا:** APK Android موقّع، ومثبت Windows، وكتاب استخدام عربي ملون من 43 صفحة، ودليل Windows والخادم، ولقطات مستقلة لأندرويد وWindows والخادم. صور الإصدار الجديد في صفحة تحقق Android 0.20.7، وصور الكتاب من النسخة 0.20.4. التسجيلات الأصلية غير مرفوعة.
+**المحتوى المتاح هنا:** APK Android موقّع، ومثبت Windows، وكتاب استخدام عربي ملون من 43 صفحة، ودليل Windows والخادم، ولقطات مستقلة لأندرويد وWindows والخادم. صور الإصدار الجديد في صفحة تحقق Android 0.20.8، وصور الكتاب من النسخة 0.20.4. التسجيلات الأصلية غير مرفوعة.
 
 [FG Machines](https://fgmachines.org) · [فتح دليل الاستخدام الكامل](docs/USER-GUIDE-AR.md)
 
