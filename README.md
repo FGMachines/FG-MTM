@@ -39,10 +39,6 @@
 
 [شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.8/FG-MTM-Android-0.20.8.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.8/SHA256SUMS.txt)
 
-النسخة المنشورة **0.20.8** وقد يظهر اسمها على الهاتف **FG MTM Review**. احتفظ ببياناتك قبل التحديث؛ اختلاف هوية التطبيق أو شهادة التوقيع قد يمنع التثبيت فوق نسخة أخرى. وظائف الشبكة تحتاج راوترًا قابلًا للوصول وصلاحيات مناسبة. وضع «بدون راوتر» للتصميم والحفظ. حفظ بروفايلات متعددة لا ينشئ اتصالًا بينها أو يدمج شبكاتها تلقائيًا.
-
-**تحديث 0.20.8:** إصلاح قراءة نقاط الوصول في العرض الواسع، وتحسين تأكيد إنشاء الكارت الفردي في نص المشاركة. يحتفظ بتحسينات تصميم 0.20.4 المستعادة في 0.20.7 وبحماية R8 والتوقيع الأصلي. اجتاز التحديث فوق 0.20.7 على Android 15 مع بقاء الجهاز المحفوظ. [صور التشغيل وتفاصيل التحقق](docs/ANDROID-0.20.8-AR.md).
-
 ## تحميل Windows 0.19.1
 
 [تحميل المثبت مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) · [بصمة التحقق SHA256](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/SHA256SUMS.txt)
