@@ -1,0 +1,26 @@
+{
+  "size": 4026561,
+  "sha256": "3d5a79b94d3503b8ea030e6072d07f49c648fd354733682742f8af4f593d06c3",
+  "parts": [
+    "part-000.b64",
+    "part-001.b64",
+    "part-002.b64",
+    "part-003.b64",
+    "part-004.b64",
+    "part-005.b64",
+    "part-006.b64",
+    "part-007.b64",
+    "part-008.b64",
+    "part-009.b64",
+    "part-010.b64",
+    "part-011.b64",
+    "part-012.b64",
+    "part-013.b64",
+    "part-014.b64",
+    "part-015.b64",
+    "part-016.b64"
+  ],
+  "source_commit": "e8d4c900b2ad35bf1dc407cd6caa969a9b57bcfe",
+  "source_build_run": 38595763058,
+  "asset": "FG-MTM-Android-0.20.11.apk"
+}

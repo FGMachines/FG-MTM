@@ -6,7 +6,7 @@
 
 إدارة الراوتر والكروت والمشتركين والأعمال — بهوية FG Machines.
 
-[تحميل أندرويد 0.20.10](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/FG-MTM-Android-0.20.10.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
+[تحميل أندرويد 0.20.11](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.11/FG-MTM-Android-0.20.11.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
 
 </div>
 
@@ -37,7 +37,7 @@
 
 **ابدأ في خمس خطوات:** ثبّت التطبيق ← اتصل بالراوتر ← افحص الجاهزية ← جرّب كارتًا واحدًا ← راجع نتيجة الدخول قبل إصدار دفعة.
 
-[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/FG-MTM-Android-0.20.10.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/SHA256SUMS.txt)
+[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.11/FG-MTM-Android-0.20.11.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.11/SHA256SUMS.txt)
 
 ## تحميل Windows 0.19.1
 
