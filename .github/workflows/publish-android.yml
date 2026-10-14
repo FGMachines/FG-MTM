@@ -2,77 +2,80 @@ name: Publish verified Android APK
 on:
   push:
     branches: [main]
-    paths: ["distribution/android-0.20.8/**", ".github/workflows/publish-android.yml"]
+    paths: ["distribution/android-0.20.9/**", ".github/workflows/publish-android.yml"]
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: android-0.20.8-release
+  group: android-0.20.9-release
   cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Reconstruct tested APK
+      - name: Reconstruct verified APK
         run: |
           python3 - <<'PY'
           import pathlib,json,base64,hashlib,zipfile
-          root=pathlib.Path('distribution/android-0.20.8');m=json.loads((root/'manifest.json').read_text())
-          assert m['sha256']=='9005d6b2b70b86b6f327f66bcdbc246f4aa47aeba19442c0cd64b38b986c3abd'
-          assert m['size']==4026427 and m['asset']=='FG-MTM-Android-0.20.8.apk'
-          assert m['source_commit']=='9c53ca2d7394d256a04ccdeb5bd755452822b5c3'
+          root=pathlib.Path('distribution/android-0.20.9');m=json.loads((root/'manifest.json').read_text())
+          assert m['sha256']=='1cba4e898c30cb1cada75022047421e748a296098351a3c3e1bfef37c401d091' and m['size']==4026427
+          assert m['asset']=='FG-MTM-Android-0.20.9.apk' and m['source_commit']=='3328d1dc8b148748e8c43981c1633ad7c0430c29'
           data=b''.join(base64.b64decode((root/p).read_text(),validate=True) for p in m['parts'])
           assert len(data)==m['size'] and hashlib.sha256(data).hexdigest()==m['sha256']
-          report=json.loads((root/'verification.json').read_text())
-          assert report['upgrade_from']=='0.20.7-review' and report['upgrade_to']=='0.20.8-review'
-          assert report['install_replace']=='passed' and report['saved_router_profile_preserved']
-          assert report['candidate_sha256']==m['sha256'] and report['source_commit']==m['source_commit']
-          assert report['evidence_run']==38549455341 and not report['crashes']
-          assert report['compact_voucher_tiles'] and report['expiry_and_print_dialogs'] and report['disconnect_settings_only']
-          assert report['unit_tests']==169 and report['unit_failures']==0
-          assert report['lint_errors']==0 and report['android_ui_tests']==10 and report['android_ui_failures']==0
+          r=json.loads((root/'verification.json').read_text())
+          assert r['candidate_sha256']==m['sha256'] and r['source_commit']==m['source_commit']
+          assert r['upgrade_from']=='0.20.8-review' and r['upgrade_to']=='0.20.9'
+          assert r['app_label']=='FG MTM' and r['version_code']==39
+          assert r['install_replace']=='passed' and r['saved_router_profile_preserved'] and not r['crashes']
+          assert r['volunteer_support_arabic_english'] and r['volunteer_card_after_github'] and r['whatsapp_link_correct_number']
+          assert not r['call_placed'] and not r['whatsapp_message_sent']
+          assert r['unit_tests']==169 and r['unit_failures']==0 and r['lint_errors']==0
+          assert r['android_ui_tests']==11 and r['android_ui_failures']==0
           out=pathlib.Path('android-assets');out.mkdir()
           apk=out/m['asset'];apk.write_bytes(data)
           with zipfile.ZipFile(apk) as z: assert z.testzip() is None and 'AndroidManifest.xml' in z.namelist()
           (out/'SHA256SUMS.txt').write_text(m['sha256']+'  '+m['asset']+'\n')
           PY
-      - name: Verify identity and original signing certificate
+      - name: Verify original certificate, name and identity
         run: |
           signer="$ANDROID_HOME/build-tools/35.0.0/apksigner"
           if [ ! -x "$signer" ]; then sdkmanager 'build-tools;35.0.0'; fi
-          "$signer" verify --min-sdk-version 26 --max-sdk-version 35 --print-certs android-assets/FG-MTM-Android-0.20.8.apk > certificate.txt
+          "$signer" verify --min-sdk-version 26 --max-sdk-version 35 --print-certs android-assets/FG-MTM-Android-0.20.9.apk > certificate.txt
           grep -Fx 'Signer #1 certificate SHA-256 digest: 4218f40caf43573a4ef9f79279e43f5a54424cdf28436e45ee3a1e84645fc502' certificate.txt
-          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging android-assets/FG-MTM-Android-0.20.8.apk > identity.txt
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging android-assets/FG-MTM-Android-0.20.9.apk > identity.txt
           grep -F "name='com.fgmachines.mikrotikmanager.preview'" identity.txt
-          grep -F "versionCode='38'" identity.txt
-          grep -F "versionName='0.20.8-review'" identity.txt
+          grep -F "versionCode='39'" identity.txt
+          grep -F "versionName='0.20.9'" identity.txt
+          grep -Fx "application-label:'FG MTM'" identity.txt
           if grep -q application-debuggable identity.txt; then exit 1; fi
       - name: Write release notes
         run: |
           cat > notes.md <<'NOTES'
-          تحديث FG MTM Android 0.20.8 بالتوقيع الأصلي وهوية التثبيت نفسها.
-
-          الجديد: إصلاح قراءة نقاط الوصول في العرض الواسع، وتحسين تأكيد إنشاء الكارت الفردي في نص المشاركة عند نجاح جزء من الدفعة. يحتفظ بتحسينات 0.20.4 المستعادة في 0.20.7: قطع الاتصال في الإعدادات فقط، ست بطاقات مصغرة وقوائم النوع والمدة والباقات، نوافذ الانتهاء وكلمة المرور والطباعة وQR، وروابط المطور والإحصاءات.
-
-          التحقق: 169 اختبار وحدة ناجحًا، و10 اختبارات Android مختارة ناجحة، وLint دون أخطاء مع 19 تحذيرًا. R8 وتقليص الموارد وتعطيل Debug مستمرة.
-
-          اجتاز APK النهائي الموقّع تحديث 0.20.7 إلى 0.20.8 على محاكي Android 15 دون حذف التطبيق، مع بقاء الجهاز المحفوظ. هوية التثبيت com.fgmachines.mikrotikmanager.preview، ورقم الإصدار الداخلي 38. قد يظهر الاسم FG MTM Review.
-
-          واجهات الراوتر اختُبرت باستخدام API محلي للقراءة، واختبارات الإنشاء استخدمت نقلًا محاكيًا. لم يُختبر راوتر أو هاتف أو طابعة فعلية في هذه الجولة، والمقارنة البصرية الشاملة ما زالت ضمن المتبقي.
-
+          FG MTM Android 0.20.9
+          
+          - اسم التطبيق على الهاتف أصبح FG MTM دون Review، ورقم الإصدار الظاهر 0.20.9.
+          - إضافة بطاقة «الدعم التطوعي وشرح التطبيق» تحت GitHub في صفحة عن المطور.
+          - أبو يوسف عطا متطوع للمساعدة في فهم التطبيق واستخدامه، والرقم 01223005507 للتواصل عبر WhatsApp فقط. البطاقة تفتح https://wa.me/201223005507 ولا تبدأ مكالمة.
+          - الحفاظ على تصميم التطبيق وحماية R8 وتقليص الموارد والتوقيع الأصلي وهوية التثبيت com.fgmachines.mikrotikmanager.preview.
+          
           ثبّت فوق النسخة الحالية دون حذف التطبيق.
-          الحجم: 4,026,427 بايت.
-          SHA256: 9005d6b2b70b86b6f327f66bcdbc246f4aa47aeba19442c0cd64b38b986c3abd
-          الصور وتفاصيل التحقق: https://github.com/FGMachines/FG-MTM/blob/main/docs/ANDROID-0.20.8-AR.md
+          التحقق والصور: https://github.com/FGMachines/FG-MTM/blob/main/docs/ANDROID-0.20.9-AR.md
+          
+          التحقق: 169 اختبار وحدة و11 اختبار Android ناجحًا، وLint دون أخطاء مع 19 تحذيرًا.
+          اجتاز APK الموقّع تحديث 0.20.8 إلى 0.20.9 على Android 15 مع بقاء الجهاز المحفوظ.
+          الحجم: 4026427 بايت.
+          SHA256: 1cba4e898c30cb1cada75022047421e748a296098351a3c3e1bfef37c401d091
+          لم يُختبر هاتف أو راوتر أو طابعة فعلية، ولم تُرسل رسائل WhatsApp.
+          تغيير الاسم لا يزيل تحذير Play Protect ولا يعني اعتماد Google للتطبيق.
           NOTES
-      - name: Publish Android download
+      - name: Publish official APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view android-v0.20.8 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload android-v0.20.8 android-assets/* --clobber --repo "$GITHUB_REPOSITORY"
-            gh release edit android-v0.20.8 --title "FG MTM Android 0.20.8" --notes-file notes.md --repo "$GITHUB_REPOSITORY"
+          if gh release view android-v0.20.9 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload android-v0.20.9 android-assets/* --clobber --repo "$GITHUB_REPOSITORY"
+            gh release edit android-v0.20.9 --title "FG MTM Android 0.20.9" --notes-file notes.md --repo "$GITHUB_REPOSITORY"
           else
-            gh release create android-v0.20.8 android-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Android 0.20.8" --notes-file notes.md --latest=false
+            gh release create android-v0.20.9 android-assets/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "FG MTM Android 0.20.9" --notes-file notes.md --latest=false
           fi
