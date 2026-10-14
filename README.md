@@ -6,7 +6,7 @@
 
 إدارة الراوتر والكروت والمشتركين والأعمال — بهوية FG Machines.
 
-[تحميل أندرويد 0.20.9](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.9/FG-MTM-Android-0.20.9.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
+[تحميل أندرويد 0.20.10](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/FG-MTM-Android-0.20.10.apk) • [تحميل Windows 0.19.1](https://github.com/FGMachines/FG-MTM/releases/download/v0.19.1/FG-MTM-Windows-0.19.1-Setup.exe) • [كتاب الاستخدام المصوّر](docs/FG-MTM-User-Book-AR.pdf)
 
 </div>
 
@@ -21,6 +21,8 @@
 | الاتصال بالراوتر | الرئيسية | إنشاء الكروت |
 | :---: | :---: | :---: |
 | <img src="docs/screenshots/android-0.20.9-home-arabic.png" width="220" alt="شاشة الاتصال واكتشاف الراوترات على أندرويد"> | <img src="docs/screenshots/android-0.20.9-main-menu-arabic.png" width="220" alt="القائمة الرئيسية على أندرويد"> | <img src="docs/screenshots/android-0.20.9-vouchers-arabic.png" width="220" alt="إعداد كروت الدخول على أندرويد"> |
+
+**تحديث 0.20.10:** بطاقة أبو يوسف عطا أصبحت أعلى صفحة «عن المطور»، مع زر [واتساب](https://wa.me/201223005507) وزر [فيسبوك](https://www.facebook.com/share/1FbU5L2dvf/). [شاهد شكل الصفحة والتحقق](docs/ANDROID-0.20.10-AR.md).
 
 ### هتستفيد بإيه؟
 
@@ -37,7 +39,7 @@
 
 **ابدأ في خمس خطوات:** ثبّت التطبيق ← اتصل بالراوتر ← افحص الجاهزية ← جرّب كارتًا واحدًا ← راجع نتيجة الدخول قبل إصدار دفعة.
 
-[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.9/FG-MTM-Android-0.20.9.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.9/SHA256SUMS.txt)
+[شرح أندرويد خطوة بخطوة](docs/USER-GUIDE-AR.md#android) · [تحميل APK مباشرة](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/FG-MTM-Android-0.20.10.apk) · [بصمة SHA256](https://github.com/FGMachines/FG-MTM/releases/download/android-v0.20.10/SHA256SUMS.txt)
 
 ## تحميل Windows 0.19.1
 
@@ -100,7 +102,7 @@
 
 الجداول الفاضية والأرقام في الصور تخص وقت التصوير. فتح شاشة أو ظهور زر مش دليل إن العملية نجحت على الراوتر؛ اقرأ النتيجة وجرب الوظيفة بعد التنفيذ.
 
-**المحتوى المتاح هنا:** APK Android موقّع، ومثبت Windows، وكتاب استخدام عربي ملون من 43 صفحة، ودليل Windows والخادم، ولقطات مستقلة لأندرويد وWindows والخادم. صور الإصدار الجديد في صفحة تحقق Android 0.20.9، وصور الكتاب من النسخة 0.20.4. التسجيلات الأصلية غير مرفوعة.
+**المحتوى المتاح هنا:** APK Android موقّع، ومثبت Windows، وكتاب استخدام عربي ملون من 43 صفحة، ودليل Windows والخادم، ولقطات مستقلة لأندرويد وWindows والخادم. صور صفحة الدعم الجديدة في صفحة تحقق Android 0.20.10، وصور الكتاب من النسخة 0.20.4. التسجيلات الأصلية غير مرفوعة.
 
 [FG Machines](https://fgmachines.org) · [فتح دليل الاستخدام الكامل](docs/USER-GUIDE-AR.md)
 
