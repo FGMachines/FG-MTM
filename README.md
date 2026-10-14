@@ -58,7 +58,12 @@
 - [شرح لوحة الخادم](docs/USER-GUIDE-AR.md#server)
 - [أسئلة شائعة وحل المشكلات](docs/USER-GUIDE-AR.md#faq)
 
-[![أُنشئ هذا المشروع بناءً على رغبة أبو يوسف عطا — زيارة صفحته على Facebook](docs/assets/abu-youssef-credit.svg)](https://www.facebook.com/share/1A9AYhomaK/)
+<table>
+<tr>
+<td width="50%" align="center"><a href="https://www.facebook.com/share/1A9AYhomaK/"><img src="docs/assets/abu-youssef-credit.svg" width="480" alt="أبو يوسف عطا — أُنشئ المشروع بناءً على رغبته — زيارة حسابه على فيسبوك"></a></td>
+<td width="50%" align="center"><a href="https://www.facebook.com/share/19f4d5qXEf/"><img src="docs/assets/developer-facebook.svg" width="480" alt="حساب المطور علاء محمد على فيسبوك"></a></td>
+</tr>
+</table>
 
 ## ما الذي يقدّمه البرنامج؟
 
